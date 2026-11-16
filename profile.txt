@@ -8,7 +8,6 @@ name=Sofie Toropeew
 
 title1=Bachelor of Arts in Business Administration
 
-
 expertise=Marketing, Sales, AI
 
 education=Master Marketing Intelligence, University of Pforzheim, Germany
