@@ -17,3 +17,6 @@ email=toropeew@hs-pforzheim.de
 linkedin=www.linkedin.com/in/sofie-toropeew-b36a21225
 
 about1=Student in Pforzheim
+about2=
+about3=
+about4=
