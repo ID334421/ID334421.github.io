@@ -409,7 +409,8 @@
   <script type="module">
     import {
       FilesetResolver,
-      HandLandmarker
+      HandLandmarker,
+      PoseLandmarker
     } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14";
 
     // DOM Elements
@@ -656,9 +657,10 @@
     updateShapeBadge();
 
     // ==========================================
-    // MEDIAPIPE HAND LANDMARKER & CAMERA SETUP
+    // MEDIAPIPE HAND & POSE LANDMARKERS SETUP
     // ==========================================
     let handLandmarker = null;
+    let poseLandmarker = null;
     let isLandmarkerReady = false;
     let cameraRunning = false;
 
@@ -683,16 +685,28 @@
           "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm"
         );
 
-        loadingTitle.textContent = "Loading Hand Landmarker Model...";
-        handLandmarker = await HandLandmarker.createFromOptions(vision, {
-          baseOptions: {
-            modelAssetPath: "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
-            delegate: "GPU"
-          },
-          runningMode: "VIDEO",
-          numHands: 1
-        });
+        loadingTitle.textContent = "Loading Hand & Pose Landmarker Models...";
+        const [hLandmarker, pLandmarker] = await Promise.all([
+          HandLandmarker.createFromOptions(vision, {
+            baseOptions: {
+              modelAssetPath: "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+              delegate: "GPU"
+            },
+            runningMode: "VIDEO",
+            numHands: 1
+          }),
+          PoseLandmarker.createFromOptions(vision, {
+            baseOptions: {
+              modelAssetPath: "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
+              delegate: "GPU"
+            },
+            runningMode: "VIDEO",
+            numPoses: 1
+          })
+        ]);
 
+        handLandmarker = hLandmarker;
+        poseLandmarker = pLandmarker;
         isLandmarkerReady = true;
         loadingTitle.textContent = "MediaPipe Ready!";
         loadingDesc.textContent = "Click below to grant camera access and start the interactive demo.";
@@ -840,42 +854,135 @@
       targetShapeScale = 0.5 + distNorm * (2.5 - 0.5);
     }
 
-    // Draw glowing skeleton over mirrored webcam
-    function drawSkeleton(landmarks) {
+    // Draw glowing pose skeleton (face points, shoulders, arms) and hand skeleton
+    function drawSkeletons(poseLandmarks, handLandmarks) {
       sCtx.clearRect(0, 0, skeletonCanvas.width, skeletonCanvas.height);
-      if (!landmarks || landmarks.length === 0) return;
-
       const sw = skeletonCanvas.width;
       const sh = skeletonCanvas.height;
 
-      // Glow style
-      sCtx.lineWidth = 3;
-      sCtx.strokeStyle = "#00f0ff";
-      sCtx.shadowColor = "#00f0ff";
-      sCtx.shadowBlur = 10;
-      sCtx.lineCap = "round";
+      // 1. POSE SKELETON (Face points, Shoulders, Arms like in reference image)
+      if (poseLandmarks && poseLandmarks.length > 0) {
+        // A. Face Keypoints & Features (Glowing Pink/Magenta like in reference image)
+        const faceLines = [
+          [0, 1], [1, 2], [2, 3], [3, 7], // Left eyebrow / eye / ear
+          [0, 4], [4, 5], [5, 6], [6, 8], // Right eyebrow / eye / ear
+          [9, 10],                        // Mouth
+          [1, 4], [2, 0], [5, 0]          // Nose bridge V-contour
+        ];
 
-      // Connecting bones
-      HAND_CONNECTIONS.forEach(([i1, i2]) => {
-        const p1 = landmarks[i1];
-        const p2 = landmarks[i2];
-        sCtx.beginPath();
-        sCtx.moveTo(p1.x * sw, p1.y * sh);
-        sCtx.lineTo(p2.x * sw, p2.y * sh);
-        sCtx.stroke();
-      });
+        sCtx.lineWidth = 2.5;
+        sCtx.strokeStyle = "#ff007f";
+        sCtx.shadowColor = "#ff007f";
+        sCtx.shadowBlur = 9;
+        sCtx.lineCap = "round";
 
-      // Joint Knuckles
-      sCtx.shadowBlur = 14;
-      landmarks.forEach((p, idx) => {
-        sCtx.beginPath();
-        const r = (idx === 4 || idx === 8 || idx === 12 || idx === 16 || idx === 20) ? 5 : 3.5;
-        sCtx.arc(p.x * sw, p.y * sh, r, 0, Math.PI * 2);
-        sCtx.fillStyle = idx === 0 ? "#ff007f" : "#ffffff";
-        sCtx.fill();
-      });
+        faceLines.forEach(([i1, i2]) => {
+          const p1 = poseLandmarks[i1];
+          const p2 = poseLandmarks[i2];
+          if (p1 && p2 && (p1.visibility === undefined || p1.visibility > 0.35) && (p2.visibility === undefined || p2.visibility > 0.35)) {
+            sCtx.beginPath();
+            sCtx.moveTo(p1.x * sw, p1.y * sh);
+            sCtx.lineTo(p2.x * sw, p2.y * sh);
+            sCtx.stroke();
+          }
+        });
 
-      // Reset shadow for performance
+        // Face dots (Nose, eyes, ears, mouth)
+        for (let idx = 0; idx <= 10; idx++) {
+          const p = poseLandmarks[idx];
+          if (p && (p.visibility === undefined || p.visibility > 0.35)) {
+            sCtx.beginPath();
+            sCtx.arc(p.x * sw, p.y * sh, 3.2, 0, Math.PI * 2);
+            sCtx.fillStyle = "#ff69b4";
+            sCtx.fill();
+          }
+        }
+
+        // B. Shoulders (Prominent Golden Yellow horizontal line like in reference image)
+        const pLShoulder = poseLandmarks[11];
+        const pRShoulder = poseLandmarks[12];
+        if (pLShoulder && pRShoulder && (pLShoulder.visibility === undefined || pLShoulder.visibility > 0.3) && (pRShoulder.visibility === undefined || pRShoulder.visibility > 0.3)) {
+          sCtx.lineWidth = 3.5;
+          sCtx.strokeStyle = "#ffd700";
+          sCtx.shadowColor = "#ffd700";
+          sCtx.shadowBlur = 12;
+
+          sCtx.beginPath();
+          sCtx.moveTo(pLShoulder.x * sw, pLShoulder.y * sh);
+          sCtx.lineTo(pRShoulder.x * sw, pRShoulder.y * sh);
+          sCtx.stroke();
+
+          // Shoulder joint nodes
+          [pLShoulder, pRShoulder].forEach(p => {
+            sCtx.beginPath();
+            sCtx.arc(p.x * sw, p.y * sh, 5.5, 0, Math.PI * 2);
+            sCtx.fillStyle = "#ffffff";
+            sCtx.fill();
+          });
+        }
+
+        // C. Arms (Cyan lines from shoulder to elbow to wrist like in reference image)
+        const armLines = [
+          [11, 13], [13, 15], // Left arm: shoulder -> elbow -> wrist
+          [12, 14], [14, 16]  // Right arm: shoulder -> elbow -> wrist
+        ];
+
+        sCtx.lineWidth = 3.0;
+        sCtx.strokeStyle = "#00f0ff";
+        sCtx.shadowColor = "#00f0ff";
+        sCtx.shadowBlur = 10;
+
+        armLines.forEach(([i1, i2]) => {
+          const p1 = poseLandmarks[i1];
+          const p2 = poseLandmarks[i2];
+          if (p1 && p2 && (p1.visibility === undefined || p1.visibility > 0.3) && (p2.visibility === undefined || p2.visibility > 0.3)) {
+            sCtx.beginPath();
+            sCtx.moveTo(p1.x * sw, p1.y * sh);
+            sCtx.lineTo(p2.x * sw, p2.y * sh);
+            sCtx.stroke();
+          }
+        });
+
+        // Elbow & wrist nodes
+        [13, 14, 15, 16].forEach(idx => {
+          const p = poseLandmarks[idx];
+          if (p && (p.visibility === undefined || p.visibility > 0.3)) {
+            sCtx.beginPath();
+            sCtx.arc(p.x * sw, p.y * sh, 4.5, 0, Math.PI * 2);
+            sCtx.fillStyle = "#ffffff";
+            sCtx.fill();
+          }
+        });
+      }
+
+      // 2. HAND SKELETON (Hand Landmarker 21 points)
+      if (handLandmarks && handLandmarks.length > 0) {
+        sCtx.lineWidth = 2.8;
+        sCtx.strokeStyle = "#00f0ff";
+        sCtx.shadowColor = "#00f0ff";
+        sCtx.shadowBlur = 10;
+        sCtx.lineCap = "round";
+
+        HAND_CONNECTIONS.forEach(([i1, i2]) => {
+          const p1 = handLandmarks[i1];
+          const p2 = handLandmarks[i2];
+          sCtx.beginPath();
+          sCtx.moveTo(p1.x * sw, p1.y * sh);
+          sCtx.lineTo(p2.x * sw, p2.y * sh);
+          sCtx.stroke();
+        });
+
+        // Joint Knuckles
+        sCtx.shadowBlur = 12;
+        handLandmarks.forEach((p, idx) => {
+          sCtx.beginPath();
+          const r = (idx === 4 || idx === 8 || idx === 12 || idx === 16 || idx === 20) ? 5 : 3.5;
+          sCtx.arc(p.x * sw, p.y * sh, r, 0, Math.PI * 2);
+          sCtx.fillStyle = idx === 0 ? "#ff007f" : "#ffffff";
+          sCtx.fill();
+        });
+      }
+
       sCtx.shadowBlur = 0;
     }
 
@@ -884,20 +991,40 @@
       if (webcamVideo.readyState >= 2 && isLandmarkerReady) {
         if (webcamVideo.currentTime !== lastVideoTime) {
           lastVideoTime = webcamVideo.currentTime;
-          const detections = handLandmarker.detectForVideo(webcamVideo, performance.now());
+          const now = performance.now();
 
-          if (detections.landmarks && detections.landmarks.length > 0) {
-            const lms = detections.landmarks[0];
-            analyzeHand(lms, detections.handedness);
-            drawSkeleton(lms);
-          } else {
-            // Hand not detected
-            handGesturePill.textContent = "Searching...";
-            handGesturePill.style.color = "#94a3b8";
-            sCtx.clearRect(0, 0, skeletonCanvas.width, skeletonCanvas.height);
-            isOpenPalm = false;
-            isFistClosed = false;
+          let poseLandmarks = null;
+          let handLandmarks = null;
+
+          if (poseLandmarker) {
+            try {
+              const pDetections = poseLandmarker.detectForVideo(webcamVideo, now);
+              if (pDetections.landmarks && pDetections.landmarks.length > 0) {
+                poseLandmarks = pDetections.landmarks[0];
+              }
+            } catch (e) {
+              console.warn("Pose detection error:", e);
+            }
           }
+
+          if (handLandmarker) {
+            try {
+              const hDetections = handLandmarker.detectForVideo(webcamVideo, now);
+              if (hDetections.landmarks && hDetections.landmarks.length > 0) {
+                handLandmarks = hDetections.landmarks[0];
+                analyzeHand(handLandmarks, hDetections.handedness);
+              } else {
+                handGesturePill.textContent = "Searching...";
+                handGesturePill.style.color = "#94a3b8";
+                isOpenPalm = false;
+                isFistClosed = false;
+              }
+            } catch (e) {
+              console.warn("Hand detection error:", e);
+            }
+          }
+
+          drawSkeletons(poseLandmarks, handLandmarks);
         }
       }
       requestAnimationFrame(predictWebcam);
