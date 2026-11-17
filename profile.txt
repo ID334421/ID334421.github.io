@@ -6,8 +6,8 @@
 
 name=Sofie Toropeew
 
-title1=Bachelor of Arts in Business Administration
-title2=Working Student SAP
+title1=Student @ Business School Pforzheim
+title2=Working Student @ SAP
 
 expertise=Marketing, Sales, AI
 
@@ -16,7 +16,10 @@ education=Master Marketing Intelligence, University of Pforzheim, Germany
 email=toropeew@hs-pforzheim.de
 linkedin=www.linkedin.com/in/sofie-toropeew-b36a21225
 
-about1=Student in Pforzheim
+about1=I’m Sofie, a Master’s student in Marketing Intelligence at Pforzheim University with a focus on data science, psychology and statistics. Alongside my studies, I work as a working student at SAP in demand analytics, where I spend a lot of time with dashboards and Excel. I have a Bachelor’s in Business Administration and have worked in marketing before.
 about2=
 about3=
 about4=
+
+phone=
+location=Pforzheim
