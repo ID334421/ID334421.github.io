@@ -1,43 +1,80 @@
-# Strategic Positioning Document: Smart Glasses (German Market)
+# Strategiedokument: KLAR – die kamerafreie Display-Brille mit Sehstärke
 
-## 1. Product Positioning
-**Core Positioning Statement**: 
-"For German professionals and executives who demand effortless productivity without compromising privacy, **AuraVision G1** is the ultra-lightweight optical AI smart glasses that delivers discreet heads-up notifications, teleprompting, and real-time live translation through a camera-free, 100% GDPR-compliant waveguide display seamlessly integrated into classic German optical frames."
+*Arbeitsname: **KLAR**. Grundlage ist ausschließlich `01-research.md` (Stand 20.11.2026). Zu unseren eigenen Ressourcen (Hardware-Know-how, Herstellkosten, Budget) enthält der Bericht nichts. Machbarkeit und Preispunkt sind deshalb Annahmen, die geprüft werden müssen.*
 
-Unlike camera-laden competitors such as Ray-Ban Meta that trigger intense privacy scrutiny and corporate workplace bans in Germany, AuraVision G1 is completely camera-free, guaranteed compliant with *Betriebsrat* (works council) rules, and crafted from surgical-grade titanium with certified prescription lens support from trusted German opticians.
+## 1. Positionierung
 
-## 2. Target Segment
-### Primary Segment: The German Corporate Professional & Knowledge Worker
-* **Target Audience**: Corporate managers, legal consultants, software architects, engineers, and financial advisors based in key German commercial centers (Frankfurt, Munich, Stuttgart, Berlin, Hamburg).
-* **Rationale for Initial Focus**:
-  * High willingness-to-pay (€499–€699 price tier).
-  * Immediate workplace utility: discreet teleprompting during client presentations, hands-free calendar/meeting alerts, and confidential real-time translation during EU international meetings.
-  * Zero friction with German corporate privacy policies and Works Councils (*Betriebsräte*) due to the complete absence of recording sensors or cameras.
+**KLAR ist die kamerafreie Display-Brille mit Sehstärke für technikaffine Brillenträger in deutschen Großstädten. Sie bringt Übersetzung, Navigation und Benachrichtigungen hands-free ins Sichtfeld, ohne das Umfeld zu filmen. Anders als Meta setzt KLAR auf Privacy-by-Design, EU-Datenhaltung und einen austauschbaren Akku.**
 
-### Secondary Expansion Segment: The Urban Commuter & Cycling Navigator
-* **Target Audience**: Tech-forward urban commuters and daily cyclists in bike-friendly German cities (Munich, Münster, Freiburg, Berlin).
-* **Rationale**: Offers turn-by-turn navigation directly in the line of sight without requiring riders to look down at their smartphone mount in wet or rainy conditions.
+Warum diese Position:
+- Die soziale Akzeptanz ist die eigentliche Kaufhürde. 76 % wollen nicht aufgenommen werden, 62 % würden Brillenträger nicht in die Wohnung lassen (Bitkom 2026).
+- Die Regulierung richtet sich gezielt gegen Kamerabrillen: Der EDSA stuft sie als Hochrisiko ein, der HmbBfDI hält ein Verkaufsverbot für denkbar, und HateAid hat Strafanzeige gegen Hersteller und Händler gestellt. Ohne Kamera fällt der größte Teil dieser Risiken weg.
+- Even Realities zeigt, dass das Konzept funktioniert: Mit einer kamerafreien Display-Brille ist der Anbieter weltweit die Nr. 2 in H1 2026 und in Westeuropa stark.
 
-## 3. Differentiation Strategy
-AuraVision G1 differentiates across four pillars tailored to German consumer values:
+## 2. Zielgruppe
 
-| Dimension | Ray-Ban Meta | XREAL / AR Goggles | **AuraVision G1 (Our Strategy)** |
-|---|---|---|---|
-| **Privacy & GDPR Compliance** | High friction (cameras, surveillance scrutiny, works council bans) | Neutral (camera sensors for tracking) | **100% Camera-Free & GDPR-Certified (Zero bystander recording concerns)** |
-| **Aesthetics & Weight** | Fashion plastic frame (~50g) | Bulky, futuristic visor (75g–90g) | **Minimalist Bauhaus Titanium Frame (38g, looks like designer eyewear)** |
-| **Optical Display** | None (audio and camera only) | Full color Birdbath FOV (tethered cable) | **Discreet Monochrome Green Micro-LED Waveguide (Floating HUD, wireless)** |
-| **Prescription Support** | Optical partner required | Clip-in inserts | **Native German Optician Certification (Fielmann & Apollo partner network)** |
-| **Data Residency** | US cloud processing | Device / App dependent | **Local on-device processing + German / EU hosted encrypted cloud** |
+**Primär: urbane, technikaffine Brillenträger (20–45 Jahre)**
+- Sie lösen ein konkretes Problem: Sie brauchen keine zweite Brille neben der Korrekturbrille, weil sie ohnehin neue Gläser kaufen.
+- Die Nachfrage ist in Großstädten konzentriert (Fielmann). Das ermöglicht einen fokussierten, regional begrenzten Start.
+- Ihre Pain Points passen zu einem Display ohne Kamera: Übersetzung, Navigation, Telefonie, Musik.
+- Für sie ist Fotografieren ein Nice-to-have. Für Content Creator ist es ein Muss, deshalb sind diese bewusst **nicht** Zielgruppe.
 
-## 4. Go-to-Market Plan (GTM)
-### Phase 1: B2B Executive Pilot & Direct-to-Consumer Pre-Launch (Months 1–3)
-* Launch an exclusive "German Executive Founder Edition" targeting DAX corporate leaders, management consultants, and tech founders.
-* Provide corporate privacy certification packages (*Datenschutz-Zertifikat*) signed by German data privacy experts to facilitate corporate IT and Works Council approvals.
-* D2C online pre-orders with German localization (DE/EN bilingual interface, localized shipping from within the EU).
+**Sekundär (ab Phase 3): Service und Wartung in der Industrie**
+- Die Pain Points sind Fachkräftemangel, Dokumentation und Informationen im Sichtfeld (Beispiel Liebherr).
+- Entscheidend sind hier DSGVO-Konformität und die Zustimmung des Betriebsrats. Eine kamerafreie Brille mit Datenschutz-Paket senkt diese Hürde.
+- Einschränkungen:
+  - Remote-Support braucht meist eine Kamera. Abgedeckt wären nur Anwendungsfälle mit Informationsanzeige.
+  - Für Deutschland gibt es keine belastbaren ROI-Zahlen.
+  - Die Vertriebszyklen sind lang.
+  - *Informationen unzureichend, weitere Recherche empfohlen*, bevor Ressourcen gebunden werden.
 
-### Phase 2: German Optical Retail Partnerships (Months 4–7)
-* Partner with independent German master opticians (*Augenoptikermeister*) and leading retail chains (Fielmann / Apollo-Optik) for in-store try-ons, precision lens grinding (*Sehstärke*), and frame fitting.
-* Showcase at major European optical and technology expos, including **Opti Munich** and **IFA Berlin**.
+## 3. Differenzierungsstrategie
 
-### Phase 3: Enterprise B2B Licensing & Field Mobility (Months 8–12)
-* Introduce enterprise software suites: hands-free inspection checklists for German automotive/manufacturing engineers, logistics picking overlays, and encrypted VIP boardroom teleprompting.
+| Wettbewerber | Deren Stärke | Unser Gegenargument |
+|---|---|---|
+| **Ray-Ban Meta Gen 2 / Oakley** (ab 419 €) | Marke, ~80 % Marktanteil, Optiker-Vertrieb | **Keine Kamera**: Wer KLAR trägt, darf überallhin mit, auch in fremde Wohnungen. Kein Rechtsrisiko für Händler. |
+| **Meta Ray-Ban Display** (899 €) | Technologisch führend | **Preis klar unter 899 €**, Ziel ≤ 499 € (Kaufkriterium „unter 500 €“). Sehstärke ab dem Start, nicht erst später. Alle Funktionen sind in DE verfügbar. |
+| **Even Realities G2** | Gleiches Konzept (kamerafrei), stark in Westeuropa | Deutsche Sprach-KI und deutscher Support, **EU-Datenhaltung**, **austauschbarer Akku** ab dem Start (EU-Pflicht ab 18.02.2027), Optiker-Partnerschaften in DE. *Preis von Even für DE unbekannt, Recherche nötig.* |
+| **Samsung Galaxy Glasses / XREAL & Co.** | Ökosystem, Google-KI, Displays | Unabhängig vom Smartphone-Ökosystem, Fokus auf Alltagstauglichkeit statt Media und Produktivität. Der Start in DE ist bei diesen Anbietern unklar. |
+
+**Drei Kern-Verkaufsargumente**
+1. **„Sieht nichts, speichert nichts.“**
+   - KLAR hat keine Kamera, das sieht man auch an der Bauform.
+   - KI-Verarbeitung so weit wie möglich auf dem Gerät, sonst EU-Hosting.
+   - Keine Nutzung der Daten für KI-Training.
+2. **„Deine Brille, nur smarter.“**
+   - Volle Integration der Sehstärke über den Optiker.
+   - Design, das als normale Korrekturbrille durchgeht. Das ist ohne Kamera zulässig, weil die EDSA-Forderung nach unterscheidbarer Bauform auf Aufnahmegeräte zielt. *Das sollte rechtlich bestätigt werden.*
+3. **„Gebaut für Europa.“**
+   - Austauschbarer Akku, AI-Act-konform (keine Gesichtserkennung), CE/RED zum Start.
+   - Regulierung wird so zum Burggraben gegen Anbieter aus den USA und China, die in Europa verzögert starten.
+
+**Bewusster Verzicht:** keine Kamera, kein Foto/Video, keine biometrischen Funktionen. Das ist keine Lücke, sondern unser Verkaufsargument.
+
+## 4. Go-to-Market-Plan
+
+**Kanäle**
+- **Optiker-Partner (Kernkanal):** Sie sind nötig für Sehstärke und Refraktion.
+  - Pitch an den Handel: „Smart Glass ohne Strafanzeige-Risiko“. Die Anzeigen gegen Fielmann, Apollo und Mister Spex machen den Handel vorsichtig, und genau das ist unser Türöffner.
+  - Start mit unabhängigen Optikern und regionalen Ketten in Großstädten. Fielmann listet selektiv in ca. 200 urbanen Filialen und ist Ziel für Phase 2.
+- **D2C-Onlineshop:** Hier bleiben Marge und Kundendaten bei uns. Die Sehstärke kommt über ein Rezept vom Partner-Optiker.
+- **Online-Content:** Privacy-Kampagne auf Basis der Bitkom-Zahlen (76 % / 82 %), Vergleichs-Content „mit vs. ohne Kamera“, Demos zu Übersetzung und Navigation auf Deutsch.
+- **Fachmessen und PR:** Optiker-Fachmessen für die Händlergewinnung. Datenschutz- und Tech-Medien (z. B. heise, t3n, netzpolitik.org berichten bereits über das Thema) für die Earned Media.
+
+**Phasenplan**
+
+| Phase | Zeitraum | Ziele / Maßnahmen |
+|---|---|---|
+| **0 – Compliance & Produktfit** | bis Feb. 2027 | Austauschbarer Akku, CE/RED, DSGVO-App mit EU-Hosting, deutsche Sprach-KI. Rechtsprüfung der Bauform. Preis- und Kostenvalidierung für ≤ 499 €. |
+| **1 – Pilot Großstädte** | ab Frühjahr 2027, ca. 6 Monate | 2–3 Großstädte, 10–20 Partner-Optiker plus D2C. Content-Kampagne. KPIs: Abverkauf pro Optiker, Retourenquote, Nutzungsdauer, NPS. |
+| **2 – Skalierung Handel** | ab H2 2027 | Listung bei einer Optiker-Kette (Ziel: urbane Fielmann-Filialen), weitere Städte. Prüfen, ob Elektronikhandel sinnvoll ist (aktuell rechtlich unter Druck). IDC erwartet +40,5 % Marktwachstum in 2027. |
+| **3 – B2B-Pilot** | ab 2028 | 1–2 Pilotkunden in Service und Wartung mit einem „Betriebsrat-ready“-Paket (Vorlage für die Betriebsvereinbarung, DSFA-Vorlage, EU-Hosting). Startet nur nach eigener ROI-Recherche. |
+
+**Risiken und offene Punkte**
+- *Informationen unzureichend, weitere Recherche empfohlen:*
+  - Herstellkosten
+  - DE-Preis von Even Realities
+  - Zahl der Brillenträger in DE (die genannten 40 Mio. sind nicht verifiziert)
+  - Marktgröße für Deutschland
+- Fielmann sieht Smart Glasses als dauerhafte Nische. Das Absatzpotenzial sollte vorsichtig geplant werden.
+- Die Entscheidung der Bundesnetzagentur betrifft vor allem Kamerabrillen. Sie sollte trotzdem beobachtet werden.
