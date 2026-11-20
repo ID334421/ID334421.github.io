@@ -1,478 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AuraVision G1 — Smart Glasses for the German Market</title>
-  <style>
-    /* Reset and Base Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      color: #1a1a1a;
-      background-color: #f8fafc;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KLAR – Deine Brille. Nur smarter. (Demo-Prototyp)</title>
+<style>
+  :root {
+    --ink: #14181f;
+    --muted: #5a6270;
+    --bg: #f6f5f1;
+    --card: #ffffff;
+    --accent: #1f5c4a;
+    --accent-soft: #e3eee9;
+    --line: #dcd9d0;
+    --warn: #8a5a00;
+    --warn-bg: #fff4dc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+  .demo-banner {
+    background: var(--warn-bg);
+    color: var(--warn);
+    text-align: center;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #f0dca8;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+  header.site {
+    padding: 1.25rem 0;
+  }
+  .logo {
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    font-size: 1.25rem;
+  }
+  .hero {
+    padding: 3.5rem 0 4.5rem;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .slogan {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    margin: 0 0 1.25rem;
+  }
+  h1 {
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    line-height: 1.05;
+    margin: 0 0 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 38rem;
+    margin: 0 0 2rem;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    padding: 0.85rem 1.4rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn:hover { filter: brightness(1.1); }
+  .btn.secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+  }
+  .glasses {
+    width: 100%;
+    max-width: 420px;
+    justify-self: center;
+  }
+  section h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+    margin: 0 0 2rem;
+    letter-spacing: -0.01em;
+  }
+  .benefits { padding: 4rem 0; background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .cards {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .card h3 { margin: 0 0 0.6rem; font-size: 1.15rem; }
+  .card p { margin: 0; color: var(--muted); }
+  .num {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .cta { padding: 4rem 0; }
+  .cta-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  .cta-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+  .cta-box h3 { margin: 0 0 1rem; font-size: 1.2rem; }
+  form { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  label { width: 100%; font-size: 0.9rem; color: var(--muted); }
+  input {
+    flex: 1 1 200px;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  .form-msg { width: 100%; margin: 0; font-size: 0.9rem; color: var(--accent); min-height: 1.4em; }
+  .demo-note { font-size: 0.8rem; color: var(--warn); margin: 0.75rem 0 0; }
+  .privacy-note { width: 100%; margin: 0; font-size: 0.8rem; color: var(--muted); }
+  .privacy-note a, footer a { color: var(--accent); }
+  footer nav a { margin-right: 1.25rem; }
+  .placeholder { color: var(--warn); }
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2rem 0 3rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  footer p { margin: 0 0 0.5rem; }
 
-    /* Container */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+  @media (max-width: 759px) {
+    .slogan { border-radius: 12px; }
+  }
 
-    /* Navigation Bar */
-    header {
-      background-color: #ffffff;
-      border-bottom: 1px solid #e2e8f0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 70px;
-    }
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: #0f172a;
-    }
-    .logo span {
-      color: #059669;
-    }
-    .nav-cta {
-      background-color: #0f172a;
-      color: #ffffff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: background-color 0.2s;
-    }
-    .nav-cta:hover {
-      background-color: #1e293b;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 80px 0 60px;
-      text-align: center;
-      background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .badge {
-      display: inline-block;
-      padding: 6px 14px;
-      background-color: #ecfdf5;
-      color: #065f46;
-      border: 1px solid #a7f3d0;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 24px;
-      letter-spacing: 0.3px;
-    }
-    .hero h1 {
-      font-size: 2.75rem;
-      line-height: 1.2;
-      font-weight: 800;
-      color: #0f172a;
-      max-width: 850px;
-      margin: 0 auto 20px;
-      letter-spacing: -1px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #475569;
-      max-width: 720px;
-      margin: 0 auto 36px;
-    }
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      background-color: #059669;
-      color: #ffffff;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
-      transition: all 0.2s;
-    }
-    .btn-primary:hover {
-      background-color: #047857;
-      transform: translateY(-1px);
-    }
-    .btn-secondary {
-      background-color: #ffffff;
-      color: #1e293b;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      border: 1px solid #cbd5e1;
-      transition: background-color 0.2s;
-    }
-    .btn-secondary:hover {
-      background-color: #f8fafc;
-    }
-
-    /* Key Specs Bar */
-    .specs-bar {
-      padding: 30px 0;
-      background-color: #ffffff;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .specs-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      text-align: center;
-    }
-    .spec-item h4 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #0f172a;
-    }
-    .spec-item p {
-      font-size: 0.9rem;
-      color: #64748b;
-      font-weight: 500;
-    }
-
-    /* Selling Points Section */
-    .features {
-      padding: 80px 0;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-    .section-header h2 {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
-    }
-    .section-header p {
-      font-size: 1.1rem;
-      color: #64748b;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
-    }
-    .feature-card {
-      background-color: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 36px 32px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .feature-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-    }
-    .feature-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
-      background-color: #f0fdf4;
-      color: #16a34a;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 18px;
-    }
-    .feature-card h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 12px;
-    }
-    .feature-card p {
-      color: #475569;
-      font-size: 0.98rem;
-      line-height: 1.6;
-    }
-
-    /* Comparison Table Section */
-    .comparison {
-      padding: 60px 0 80px;
-      background-color: #ffffff;
-      border-top: 1px solid #e2e8f0;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .table-wrapper {
-      overflow-x: auto;
-      margin-top: 36px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-    th, td {
-      padding: 16px 20px;
-      border-bottom: 1px solid #e2e8f0;
-      font-size: 0.95rem;
-    }
-    th {
-      background-color: #f8fafc;
-      font-weight: 700;
-      color: #0f172a;
-    }
-    tr.highlight {
-      background-color: #f0fdf4;
-      font-weight: 600;
-    }
-    tr.highlight td {
-      color: #065f46;
-      border-color: #bbf7d0;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 80px 0;
-      text-align: center;
-      background-color: #0f172a;
-      color: #ffffff;
-    }
-    .cta-box h2 {
-      font-size: 2.25rem;
-      font-weight: 800;
-      margin-bottom: 16px;
-      letter-spacing: -0.5px;
-    }
-    .cta-box p {
-      font-size: 1.15rem;
-      color: #94a3b8;
-      max-width: 600px;
-      margin: 0 auto 36px;
-    }
-    .cta-box .btn-primary {
-      padding: 16px 36px;
-      font-size: 1.1rem;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #090d16;
-      color: #64748b;
-      padding: 40px 0;
-      font-size: 0.88rem;
-      border-top: 1px solid #1e293b;
-    }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer-note {
-      color: #94a3b8;
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .specs-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-      }
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
+  @media (min-width: 760px) {
+    .hero { grid-template-columns: 1.2fr 1fr; }
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .cta-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <header>
-    <div class="container nav-inner">
-      <div class="logo">AuraVision <span>G1</span></div>
-      <a href="#preorder" class="nav-cta">Pre-Order</a>
+<div class="demo-banner">Demo-Prototyp – keine echte Website, kein Verkauf, Formulare senden keine Daten.</div>
+
+<header class="site">
+  <div class="wrap">
+    <div class="logo">KLAR</div>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div>
+      <p class="slogan">KLAR. Sieht nichts. Speichert nichts. Zeigt dir alles, was du brauchst.</p>
+      <h1 id="hero-title">Deine Brille. Nur smarter.</h1>
+      <p class="sub">KLAR ist die Display-Brille mit deiner Sehstärke und ohne Kamera. Übersetzung, Navigation und Benachrichtigungen erscheinen direkt in deinem Sichtfeld, und niemand um dich herum wird gefilmt.</p>
+      <a class="btn" href="#cta">Jetzt Partner-Optiker in deiner Nähe finden</a>
     </div>
-  </header>
+    <svg class="glasses" viewBox="0 0 400 200" role="img" aria-label="Illustration einer Brille ohne Kamera">
+      <rect x="20" y="20" width="360" height="160" rx="24" fill="#e3eee9"/>
+      <rect x="55" y="70" width="125" height="80" rx="30" fill="#fff" stroke="#14181f" stroke-width="7"/>
+      <rect x="220" y="70" width="125" height="80" rx="30" fill="#fff" stroke="#14181f" stroke-width="7"/>
+      <path d="M180 100 Q200 86 220 100" fill="none" stroke="#14181f" stroke-width="7"/>
+      <line x1="55" y1="90" x2="30" y2="84" stroke="#14181f" stroke-width="7" stroke-linecap="round"/>
+      <line x1="345" y1="90" x2="370" y2="84" stroke="#14181f" stroke-width="7" stroke-linecap="round"/>
+      <rect x="240" y="96" width="60" height="6" rx="3" fill="#1f5c4a"/>
+      <rect x="240" y="108" width="40" height="6" rx="3" fill="#1f5c4a" opacity="0.6"/>
+    </svg>
+  </section>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <div class="badge">GDPR Compliant &bull; 100% Camera-Free &bull; German Certified</div>
-        <h1>The Smart Glasses Built for the German Boardroom and Beyond</h1>
-        <p>Experience instant teleprompting, live translation, and subtle heads-up alerts on a featherweight titanium frame. No intrusive cameras, 100% GDPR compliant, and engineered for German professionals.</p>
-        <div class="hero-actions">
-          <a href="#preorder" class="btn-primary">Reserve Your Founder Edition — €549</a>
-          <a href="#features" class="btn-secondary">Explore Corporate Privacy Specs</a>
-        </div>
+  <section class="benefits" aria-labelledby="benefits-title">
+    <div class="wrap">
+      <h2 id="benefits-title">Warum KLAR?</h2>
+      <div class="cards">
+        <article class="card">
+          <span class="num">01</span>
+          <h3>Keine Kamera. Keine Diskussion.</h3>
+          <p>76 % der Menschen in Deutschland wollen nicht von Smart Glasses aufgenommen werden (Bitkom 2026). Mit KLAR ist das kein Thema: Es gibt keine Kamera, und das sieht man auch. Du kannst die Brille überallhin mitnehmen, ins Büro, ins Café und zu Freunden nach Hause.</p>
+        </article>
+        <article class="card">
+          <span class="num">02</span>
+          <h3>Deine Sehstärke ist von Anfang an dabei.</h3>
+          <p>Du brauchst keine zweite Brille. Dein Partner-Optiker integriert deine Sehstärke direkt in KLAR. Das Design ist alltagstauglich.</p>
+          <!-- Intern: Zusatz „orientiert sich an einer klassischen Korrekturbrille“ entfernt – Bauform rechtlich noch nicht bestätigt, erst nach Freigabe veröffentlichen. -->
+
+        </article>
+        <article class="card">
+          <span class="num">03</span>
+          <h3>Hilft dir im Alltag, ohne dass du das Handy zückst.</h3>
+          <p>KLAR übersetzt Gespräche, zeigt dir den Weg und blendet Benachrichtigungen ein. Telefonieren und Musik hören klappt hands-free. Die Sprach-KI versteht Deutsch, und wenn du Fragen hast, hilft dir unser Support auf Deutsch.</p>
+        </article>
+        <article class="card">
+          <span class="num">04</span>
+          <h3>Gebaut für Europa.</h3>
+          <p>Deine Daten werden möglichst direkt auf der Brille verarbeitet, ansonsten auf Servern in der EU. Sie werden nie zum Training von KI genutzt. Es gibt keine Gesichtserkennung. Der Akku ist austauschbar, so hält deine Brille länger.</p>
+        </article>
       </div>
-    </section>
-
-    <!-- Specs Bar -->
-    <section class="specs-bar">
-      <div class="container specs-grid">
-        <div class="spec-item">
-          <h4>38g</h4>
-          <p>Aerospace Titanium</p>
-        </div>
-        <div class="spec-item">
-          <h4>0 Cameras</h4>
-          <p>100% GDPR Compliant</p>
-        </div>
-        <div class="spec-item">
-          <h4>Micro-LED</h4>
-          <p>Invisible Waveguide HUD</p>
-        </div>
-        <div class="spec-item">
-          <h4>Fielmann / Apollo</h4>
-          <p>Native Prescription Ready</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Core Features Section -->
-    <section class="features" id="features">
-      <div class="container">
-        <div class="section-header">
-          <h2>Intelligence in Plain Sight. Zero Privacy Compromise.</h2>
-          <p>Engineered to resolve the fundamental friction holding smart eyewear back in Germany.</p>
-        </div>
-
-        <div class="feature-grid">
-          <!-- Card 1 -->
-          <div class="feature-card">
-            <div class="feature-icon">&check;</div>
-            <h3>100% Camera-Free & Works Council Compliant</h3>
-            <p>Unlike conventional smart glasses that record bystanders and trigger office bans, AuraVision G1 features zero optical cameras or audio eavesdropping. Fully compliant with German <em>Betriebsrat</em> workplace regulations and Section 201a privacy requirements. Wear it freely into client boardrooms and production floors.</p>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="feature-card">
-            <div class="feature-icon">&#9678;</div>
-            <h3>Invisible Micro-LED Optical Waveguide Display</h3>
-            <p>Powered by a dual-eye monochrome green waveguide display, your critical notes, teleprompter cues, and turn-by-turn navigation float discreetly at infinite focus. Only you can see the display—it remains entirely invisible to observers sitting directly across the table.</p>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="feature-card">
-            <div class="feature-icon">&harr;</div>
-            <h3>Real-Time Multilingual Translation & Teleprompting</h3>
-            <p>Deliver high-stakes keynote presentations without ever looking down at cue cards. In cross-border negotiations, read live real-time German-to-English or French-to-German text translations floating seamlessly beside your conversation partner.</p>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="feature-card">
-            <div class="feature-icon">&oplus;</div>
-            <h3>Master Optician Prescription & Bauhaus Titanium</h3>
-            <p>Weighing just 38 grams, AuraVision G1 is forged from hypoallergenic aerospace titanium. Designed in the minimalist Bauhaus tradition, it blends indistinguishably into high-end executive eyewear and pairs seamlessly with custom prescription lenses from top German optical partners.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Comparison Table Section -->
-    <section class="comparison">
-      <div class="container">
-        <div class="section-header">
-          <h2>How AuraVision G1 Compares</h2>
-          <p>Tailored specifically for European regulatory standards and executive workflow.</p>
-        </div>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Feature / Dimension</th>
-                <th>Ray-Ban Meta</th>
-                <th>AR Goggles (XREAL)</th>
-                <th>AuraVision G1</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="highlight">
-                <td>German Privacy & Works Council</td>
-                <td>High friction (office bans)</td>
-                <td>Sensors present</td>
-                <td>100% Certified Compliant</td>
-              </tr>
-              <tr>
-                <td>Built-in Camera</td>
-                <td>Yes (12 MP, LED indicator)</td>
-                <td>Tracking sensors</td>
-                <td>None (Camera-Free)</td>
-              </tr>
-              <tr>
-                <td>Weight & Form Factor</td>
-                <td>~50g plastic frame</td>
-                <td>75g–90g bulky visor</td>
-                <td>38g Aerospace Titanium</td>
-              </tr>
-              <tr>
-                <td>Discreet Heads-Up Display</td>
-                <td>None (audio only)</td>
-                <td>Color Birdbath (cable tether)</td>
-                <td>Monochrome Waveguide HUD</td>
-              </tr>
-              <tr>
-                <td>Prescription Optical Integration</td>
-                <td>Third-party ordering</td>
-                <td>Clip-in insert</td>
-                <td>Certified Optician Partners</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pre-Order CTA Section -->
-    <section class="cta-section" id="preorder">
-      <div class="container cta-box">
-        <h2>Elevate Your Daily Focus with German Engineered Optical AI</h2>
-        <p>Backed by a 30-day corporate trial, German customer support, and full GDPR compliance documentation.</p>
-        <a href="#preorder" class="btn-primary">Pre-Order AuraVision G1 — €549</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-inner">
-      <div class="copyright">&copy; 2026 AuraVision Technologies GmbH. All rights reserved.</div>
-      <div class="footer-note">Demo prototype developed for venture team coordination demonstration.</div>
     </div>
-  </footer>
+  </section>
 
+  <section class="cta" id="cta" aria-labelledby="cta-title">
+    <div class="wrap">
+      <h2 id="cta-title">Bereit für KLAR?</h2>
+      <div class="cta-grid">
+        <div class="cta-box">
+          <h3>Jetzt Partner-Optiker in deiner Nähe finden</h3>
+          <form data-demo="In deiner Region gibt es noch keinen Partner-Optiker. Trag dich bei „Benachrichtige mich zum Start“ ein, dann sagen wir dir Bescheid. (Demo: Die Optiker-Suche ist nicht angebunden.)">
+            <label for="plz">Postleitzahl</label>
+            <input id="plz" name="plz" type="text" inputmode="numeric" pattern="[0-9]{5}" placeholder="z. B. 10115" required>
+            <button class="btn" type="submit">Optiker finden</button>
+            <p class="form-msg" aria-live="polite"></p>
+          </form>
+          <p class="demo-note">Demo-Formular ohne Backend – es werden keine Daten gesendet.</p>
+        </div>
+        <div class="cta-box">
+          <h3>Benachrichtige mich zum Start</h3>
+          <form data-demo="Demo: Es wurde keine Anmeldung gespeichert und keine E-Mail versendet.">
+            <label for="email">E-Mail-Adresse</label>
+            <input id="email" name="email" type="email" placeholder="du@beispiel.de" required>
+            <button class="btn secondary" type="submit">Benachrichtige mich zum Start</button>
+            <p class="privacy-note">Du erhältst eine Bestätigungs-E-Mail (Double-Opt-in). Wir nutzen deine Adresse nur, um dich zum Start zu informieren. Mehr in der <a href="#datenschutz">Datenschutzerklärung</a>.</p>
+            <p class="form-msg" aria-live="polite"></p>
+          </form>
+          <p class="demo-note">Demo-Formular ohne Backend – es werden keine Daten gesendet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav aria-label="Rechtliches">
+      <a href="#impressum">Impressum</a>
+      <a href="#datenschutz">Datenschutz</a>
+    </nav>
+    <p id="impressum" class="placeholder">Impressum: Platzhalter – wird vor einem Live-Gang ergänzt.</p>
+    <p id="datenschutz" class="placeholder">Datenschutzerklärung: Platzhalter – wird vor einem Live-Gang ergänzt.</p>
+    <p>KLAR ist ein Arbeitsname. Diese Seite ist ein Demo-Prototyp und kein öffentliches Angebot.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('form[data-demo]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.querySelector('.form-msg').textContent = form.getAttribute('data-demo');
+    });
+  });
+</script>
 </body>
 </html>
