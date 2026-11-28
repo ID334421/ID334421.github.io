@@ -1,0 +1,2 @@
+Final Project: AI Occasion Stylist is a Gemini Canvas web app that suggests four outfits for a chosen occasion, like a job interview or date night. Users pick a look and see themselves wearing it through an AI virtual try-on.
+https://share.gemini.google/UPYwV1idONfi 
